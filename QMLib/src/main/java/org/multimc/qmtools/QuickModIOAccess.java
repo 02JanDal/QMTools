@@ -1,0 +1,30 @@
+package org.multimc.qmtools;
+
+import java.io.FileNotFoundException;
+import java.io.IOException;
+import java.io.PrintWriter;
+import java.nio.charset.StandardCharsets;
+import java.nio.file.Files;
+import java.nio.file.Paths;
+
+public class QuickModIOAccess {
+    
+    public static QuickMod read(String filename) throws IOException {
+        return QuickMod.fromJson(readFile(filename));
+    }
+    
+    public static void write(String filename, QuickMod quickmod) throws FileNotFoundException {
+        writeFile(filename, quickmod.toJson());
+    }
+
+    private static String readFile(String filename) throws IOException {
+        return new String(Files.readAllBytes(Paths.get(filename)), StandardCharsets.UTF_8);
+    }
+    
+    private static void writeFile(String filename, String data) throws FileNotFoundException {
+        try (PrintWriter out = new PrintWriter(filename)) {
+            out.print(data);
+            out.close();
+        }
+    }
+}
