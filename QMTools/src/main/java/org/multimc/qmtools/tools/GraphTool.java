@@ -1,9 +1,8 @@
-package org.multimc.qmtools.qmtools;
+package org.multimc.qmtools.tools;
 
 import java.io.File;
 import java.io.FilenameFilter;
 import java.io.IOException;
-import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.Collection;
 import java.util.Collections;
@@ -22,8 +21,6 @@ import org.graphstream.graph.Graph;
 import org.graphstream.graph.Node;
 import org.graphstream.graph.implementations.SingleGraph;
 import org.graphstream.stream.file.FileSinkDOT;
-import org.graphstream.stream.file.FileSinkSVG2;
-import org.multimc.qmtools.AbstractTool;
 import org.multimc.qmtools.QuickMod;
 import org.multimc.qmtools.QuickModIOAccess;
 import org.multimc.qmtools.QuickModReference;

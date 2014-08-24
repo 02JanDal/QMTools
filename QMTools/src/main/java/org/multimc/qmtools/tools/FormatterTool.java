@@ -1,9 +1,8 @@
-package org.multimc.qmtools.qmtools;
+package org.multimc.qmtools.tools;
 
 import java.io.IOException;
 import java.util.logging.Level;
 import java.util.logging.Logger;
-import org.multimc.qmtools.AbstractTool;
 import org.multimc.qmtools.QuickMod;
 import org.multimc.qmtools.QuickModIOAccess;
 

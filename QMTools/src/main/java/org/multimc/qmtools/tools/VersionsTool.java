@@ -1,4 +1,4 @@
-package org.multimc.qmtools.versionappender;
+package org.multimc.qmtools.tools;
 
 import java.io.File;
 import java.io.FileInputStream;
@@ -13,7 +13,6 @@ import joptsimple.OptionParser;
 import joptsimple.OptionSet;
 import joptsimple.OptionSpec;
 import joptsimple.OptionSpecBuilder;
-import org.multimc.qmtools.AbstractTool;
 import org.multimc.qmtools.Interval;
 import org.multimc.qmtools.QuickMod;
 import org.multimc.qmtools.QuickModDownload;
@@ -21,9 +20,9 @@ import org.multimc.qmtools.QuickModIOAccess;
 import org.multimc.qmtools.QuickModReference;
 import org.multimc.qmtools.QuickModVersion;
 
-public class VersionAppender extends AbstractTool {
+public class VersionsTool extends AbstractTool {
     
-    public VersionAppender() {
+    public VersionsTool() {
     }
     
     @Override
@@ -32,7 +31,7 @@ public class VersionAppender extends AbstractTool {
     }
     
     public static void main(String[] args) {
-        new VersionAppender().run(args);
+        new VersionsTool().run(args);
     }
 
     @Override
@@ -61,7 +60,7 @@ public class VersionAppender extends AbstractTool {
             try {
                 parser.printHelpOn(System.out);
             } catch (IOException ex) {
-                VersionAppender.getLogger().log(Level.SEVERE, null, ex);
+                VersionsTool.getLogger().log(Level.SEVERE, null, ex);
             }
             return;
         }
@@ -70,14 +69,14 @@ public class VersionAppender extends AbstractTool {
         try {
             quickmod = QuickModIOAccess.read(options.valueOf(fileOption));
         } catch (IOException ex) {
-            Logger.getLogger(VersionAppender.class.getName()).log(Level.SEVERE, null, ex);
+            Logger.getLogger(VersionsTool.class.getName()).log(Level.SEVERE, null, ex);
             return;
         }
 
         boolean versionAlreadyExists = quickmod.containsVersion(options.valueOf(nameOption));
         if (!options.has(overwriteOption)
                 && versionAlreadyExists) {
-            Logger.getLogger(VersionAppender.class.getName()).log(Level.WARNING, "There already exists a version with the given name. Use --overwrite if you want to force overwriting");
+            Logger.getLogger(VersionsTool.class.getName()).log(Level.WARNING, "There already exists a version with the given name. Use --overwrite if you want to force overwriting");
             return;
         }
         
@@ -114,7 +113,7 @@ public class VersionAppender extends AbstractTool {
                 try {
                     version.setSha1(sha1OfFile(options.valueOf(sha1Option)));
                 } catch (NoSuchAlgorithmException | IOException ex) {
-                    Logger.getLogger(VersionAppender.class.getName()).log(Level.SEVERE, null, ex);
+                    Logger.getLogger(VersionsTool.class.getName()).log(Level.SEVERE, null, ex);
                 }
             } else {
                 version.setSha1(options.valueOf(sha1Option));
@@ -125,7 +124,7 @@ public class VersionAppender extends AbstractTool {
             QuickModReference ref = new QuickModReference();
             String[] parts = reference.split(":");
             if (parts.length != 3) {
-                VersionAppender.getLogger().log(Level.SEVERE, "Reference item needs to be in the format <type>:<uid>:<version>");
+                VersionsTool.getLogger().log(Level.SEVERE, "Reference item needs to be in the format <type>:<uid>:<version>");
                 return;
             }
             ref.setType(parts[0]);
@@ -139,7 +138,7 @@ public class VersionAppender extends AbstractTool {
             QuickModDownload download = new QuickModDownload();
             String[] parts = url.split(":");
             if (parts.length < 2 || parts.length > 3) {
-                VersionAppender.getLogger().log(Level.SEVERE, "Reference item needs to be in the format <url>:<downloadType>[:<priority>]");
+                VersionsTool.getLogger().log(Level.SEVERE, "Reference item needs to be in the format <url>:<downloadType>[:<priority>]");
                 return;
             }
             download.setUrl(parts[0]);
@@ -157,7 +156,7 @@ public class VersionAppender extends AbstractTool {
             }
             QuickModIOAccess.write(filename, quickmod);
         } catch (FileNotFoundException ex) {
-            VersionAppender.getLogger().log(Level.SEVERE, null, ex);
+            VersionsTool.getLogger().log(Level.SEVERE, null, ex);
         }
     }
     
@@ -180,6 +179,6 @@ public class VersionAppender extends AbstractTool {
     }
     
     private static Logger getLogger() {
-        return Logger.getLogger(VersionAppender.class.getName());
+        return Logger.getLogger(VersionsTool.class.getName());
     }
 }

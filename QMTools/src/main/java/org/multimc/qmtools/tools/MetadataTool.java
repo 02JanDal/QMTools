@@ -1,4 +1,4 @@
-package org.multimc.qmtools.qmtool;
+package org.multimc.qmtools.tools;
 
 import java.io.File;
 import java.io.FileNotFoundException;
@@ -16,11 +16,10 @@ import joptsimple.OptionSpec;
 import joptsimple.OptionSpecBuilder;
 import org.multimc.qmtools.QuickMod;
 import org.multimc.qmtools.QuickModIOAccess;
-import org.multimc.qmtools.AbstractTool;
 
-public class QMTool extends AbstractTool {
+public class MetadataTool extends AbstractTool {
 
-    public QMTool() {
+    public MetadataTool() {
     }
 
     @Override
@@ -29,7 +28,7 @@ public class QMTool extends AbstractTool {
     }
 
     public static void main(String[] args) {
-        new QMTool().run(args);
+        new MetadataTool().run(args);
     }
 
     @Override
@@ -60,7 +59,7 @@ public class QMTool extends AbstractTool {
             try {
                 parser.printHelpOn(System.out);
             } catch (IOException ex) {
-                QMTool.getLogger().log(Level.SEVERE, null, ex);
+                MetadataTool.getLogger().log(Level.SEVERE, null, ex);
             }
             return;
         }
@@ -70,7 +69,7 @@ public class QMTool extends AbstractTool {
             try {
                 quickmod = QuickModIOAccess.read(options.valueOf(fileOption));
             } catch (IOException ex) {
-                QMTool.getLogger().log(Level.SEVERE, null, ex);
+                MetadataTool.getLogger().log(Level.SEVERE, null, ex);
                 return;
             }
         } else {
@@ -106,7 +105,7 @@ public class QMTool extends AbstractTool {
             for (String url : options.valuesOf(urlsOption)) {
                 String[] parts = url.split(":");
                 if (parts.length != 2) {
-                    QMTool.getLogger().log(Level.SEVERE, "URL item needs to be in the format <type>:<url>");
+                    MetadataTool.getLogger().log(Level.SEVERE, "URL item needs to be in the format <type>:<url>");
                     return;
                 }
                 if (!urls.containsKey(parts[0])) {
@@ -132,7 +131,7 @@ public class QMTool extends AbstractTool {
             for (String author : options.valuesOf(authorsOption)) {
                 String[] parts = author.split(":");
                 if (parts.length != 2) {
-                    QMTool.getLogger().log(Level.SEVERE, "Author item needs to be in the format <type>:<name>");
+                    MetadataTool.getLogger().log(Level.SEVERE, "Author item needs to be in the format <type>:<name>");
                     return;
                 }
                 if (!authors.containsKey(parts[0])) {
@@ -149,7 +148,7 @@ public class QMTool extends AbstractTool {
             for (String reference : options.valuesOf(referencesOption)) {
                 String[] parts = reference.split(":");
                 if (parts.length != 2) {
-                    QMTool.getLogger().log(Level.SEVERE, "Reference item needs to be in the format <uid>:<url>");
+                    MetadataTool.getLogger().log(Level.SEVERE, "Reference item needs to be in the format <uid>:<url>");
                 }
                 references.put(parts[0], parts[1]);
             }
@@ -166,11 +165,11 @@ public class QMTool extends AbstractTool {
             }
             QuickModIOAccess.write(filename, quickmod);
         } catch (FileNotFoundException ex) {
-            QMTool.getLogger().log(Level.SEVERE, null, ex);
+            MetadataTool.getLogger().log(Level.SEVERE, null, ex);
         }
     }
 
     private static Logger getLogger() {
-        return Logger.getLogger(QMTool.class.getName());
+        return Logger.getLogger(MetadataTool.class.getName());
     }
 }

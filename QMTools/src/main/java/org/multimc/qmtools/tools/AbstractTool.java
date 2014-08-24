@@ -1,4 +1,4 @@
-package org.multimc.qmtools;
+package org.multimc.qmtools.tools;
 
 public abstract class AbstractTool {
     public abstract String getDescription();
