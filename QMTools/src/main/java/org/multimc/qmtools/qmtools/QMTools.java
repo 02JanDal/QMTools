@@ -22,6 +22,11 @@ public class QMTools {
         if (args.length == 0) {
             printRootHelp();
             return;
+        } else if (!this.tools.containsKey(args[0])) {
+            System.err.println("Unknown tool '" + args[0] + "'");
+            System.err.println();
+            printRootHelp();
+            return;
         }
         String[] newArgs = new String[args.length - 1];
         System.arraycopy(args, 1, newArgs, 0, args.length - 1);
@@ -34,6 +39,7 @@ public class QMTools {
         map.put("commands", new HelpTool(this));
         map.put("quickmod", new QMTool());
         map.put("append-version", new VersionAppender());
+        map.put("format", new FormatterTool());
         return map;
     }
     

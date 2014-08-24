@@ -31,4 +31,5 @@ task mainJar(type: OneJar) {
 dependencies {
     compile project(':QMTool')
     compile project(':VersionAppender')
+    compile group: 'com.google.code.gson', name: 'gson', version: '2.3'
 }
