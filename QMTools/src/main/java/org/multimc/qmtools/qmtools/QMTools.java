@@ -1,23 +1,24 @@
 package org.multimc.qmtools.qmtools;
 
-import java.util.HashMap;
-import java.util.Iterator;
-import java.util.Map;
 import org.multimc.qmtools.AbstractTool;
 import org.multimc.qmtools.qmtool.QMTool;
 import org.multimc.qmtools.versionappender.VersionAppender;
 
+import java.io.File;
+import java.util.HashMap;
+import java.util.Map;
+
 public class QMTools {
-    public static void main(String[] args) {
-        new QMTools().run(args);
-    }
-    
     private final Map<String, AbstractTool> tools;
-    
+
     private QMTools() {
         this.tools = createTools();
     }
-    
+
+    public static void main(String[] args) {
+        new QMTools().run(args);
+    }
+
     private void run(String[] args) {
         if (args.length == 0) {
             printRootHelp();
@@ -32,7 +33,7 @@ public class QMTools {
         System.arraycopy(args, 1, newArgs, 0, args.length - 1);
         this.tools.get(args[0]).run(newArgs);
     }
-    
+
     private Map<String, AbstractTool> createTools() {
         Map<String, AbstractTool> map = new HashMap<>();
         map.put("help", new HelpTool(this));
@@ -43,28 +44,29 @@ public class QMTools {
         map.put("graph", new GraphTool());
         return map;
     }
-    
+
     private void printRootHelp() {
-        System.out.println("Usage: java -jar QMTools.jar <tool> [<options>]");
+        String binary = "bin" + File.separator + "QMTools";
+        System.out.println("Usage: " + binary + " <tool> [<options>]");
         System.out.println();
-        System.out.println("Available tool:");
+        System.out.println("Available tools:");
         for (Map.Entry<String, AbstractTool> entry : tools.entrySet()) {
             System.out.println("\t" + entry.getKey() + "\t" + entry.getValue().getDescription());
         }
     }
-    
+
     private class HelpTool extends AbstractTool {
         private final QMTools parent;
-        
+
         public HelpTool(QMTools parent) {
             this.parent = parent;
         }
-        
+
         @Override
         public String getDescription() {
             return "Lists all available commands and shows help for them";
         }
-        
+
         @Override
         public void run(String[] args) {
             if (args.length == 0) {

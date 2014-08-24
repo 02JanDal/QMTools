@@ -21,7 +21,7 @@ buildscript {
 }
 
 task mainJar(type: OneJar) {
-    mainClass = 'org.multimc.qmtools.qmtools.QMTools'
+    mainClass = project.mainClass
 }
 
 dependencies {
