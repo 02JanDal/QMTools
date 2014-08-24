@@ -40,6 +40,7 @@ public class QMTools {
         map.put("quickmod", new QMTool());
         map.put("append-version", new VersionAppender());
         map.put("format", new FormatterTool());
+        map.put("graph", new GraphTool());
         return map;
     }
     

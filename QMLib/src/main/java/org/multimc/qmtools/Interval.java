@@ -6,9 +6,11 @@ public class Interval {
     private String upper = "";
     private boolean lowerInclusive = true;
     private boolean upperInclusive = false;
+    private String plain = null;
     
-    public static Interval fromString(String str) throws IntervalParseException {
+    public static Interval fromString(String str) {
         Interval interval = new Interval();
+        try {
         if (str.length() < 5) {
             throw new IntervalParseException("Interval needs to be at least 5 characters long (" + str + ")");
         }
@@ -29,6 +31,9 @@ public class Interval {
         if (!str.contains(",")) {
             throw new IntervalParseException("Interval needs to contain a ',' (" + str + ")");
         }
+        } catch (IntervalParseException ex) {
+            return new Interval(str);
+        }
         str = str.substring(1, str.length() - 1);
         int midPos = str.indexOf(',');
         interval.setLower(str.substring(0, midPos));
@@ -39,6 +44,9 @@ public class Interval {
     public Interval(String lower, String upper) {
         this.lower = lower;
         this.upper = upper;
+    }
+    public Interval(String plain) {
+        this.plain = plain;
     }
     public Interval() {
     }
@@ -77,6 +85,9 @@ public class Interval {
 
     @Override
     public String toString() {
+        if (this.plain != null) {
+            return this.plain;
+        }
         StringBuilder builder = new StringBuilder();
         builder.append(this.lowerInclusive ? '[' : '(');
         builder.append(this.lower);

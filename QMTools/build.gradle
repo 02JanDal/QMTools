@@ -32,4 +32,6 @@ dependencies {
     compile project(':QMTool')
     compile project(':VersionAppender')
     compile group: 'com.google.code.gson', name: 'gson', version: '2.3'
+    compile group: 'org.graphstream', name: 'gs-core', version: '1.2'
+    compile group: 'org.graphstream', name: 'gs-ui', version: '1.2'
 }

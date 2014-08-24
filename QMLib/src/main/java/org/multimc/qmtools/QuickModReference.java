@@ -3,7 +3,7 @@ package org.multimc.qmtools;
 public class QuickModReference {
     private String type;
     private String uid;
-    private String version;
+    private Interval version;
 
     public String getType() {
         return type;
@@ -21,12 +21,16 @@ public class QuickModReference {
         this.uid = uid;
     }
 
-    public String getVersion() {
+    public Interval getVersion() {
         return version;
     }
 
-    public void setVersion(String version) {
+    public void setVersion(Interval version) {
         this.version = version;
+    }
+    
+    public void setVersion(String version) {
+        this.version = Interval.fromString(version);
     }
     
 }
