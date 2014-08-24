@@ -16,9 +16,24 @@ import joptsimple.OptionSpec;
 import joptsimple.OptionSpecBuilder;
 import org.multimc.qmtools.QuickMod;
 import org.multimc.qmtools.QuickModIOAccess;
+import org.multimc.qmtools.AbstractTool;
 
-public class QMTool {
+public class QMTool extends AbstractTool {
+
+    public QMTool() {
+    }
+
+    @Override
+    public String getDescription() {
+        return "Modify the root QuickMod object (metadata)";
+    }
+
     public static void main(String[] args) {
+        new QMTool().run(args);
+    }
+
+    @Override
+    public void run(String[] args) {
         OptionParser parser = new OptionParser();
         OptionSpec<String> outOption = parser.accepts("out", "If set, outputs the result to a separate file")
                 .withRequiredArg().ofType(String.class);
@@ -154,7 +169,7 @@ public class QMTool {
             QMTool.getLogger().log(Level.SEVERE, null, ex);
         }
     }
-    
+
     private static Logger getLogger() {
         return Logger.getLogger(QMTool.class.getName());
     }

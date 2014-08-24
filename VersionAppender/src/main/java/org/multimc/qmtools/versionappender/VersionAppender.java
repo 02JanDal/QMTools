@@ -13,6 +13,7 @@ import joptsimple.OptionParser;
 import joptsimple.OptionSet;
 import joptsimple.OptionSpec;
 import joptsimple.OptionSpecBuilder;
+import org.multimc.qmtools.AbstractTool;
 import org.multimc.qmtools.Interval;
 import org.multimc.qmtools.QuickMod;
 import org.multimc.qmtools.QuickModDownload;
@@ -20,9 +21,22 @@ import org.multimc.qmtools.QuickModIOAccess;
 import org.multimc.qmtools.QuickModReference;
 import org.multimc.qmtools.QuickModVersion;
 
-public class VersionAppender {
-
+public class VersionAppender extends AbstractTool {
+    
+    public VersionAppender() {
+    }
+    
+    @Override
+    public String getDescription() {
+        return "Modify the root QuickMod object (metadata)";
+    }
+    
     public static void main(String[] args) {
+        new VersionAppender().run(args);
+    }
+
+    @Override
+    public void run(String[] args) {
         OptionParser parser = new OptionParser();
         OptionSpec<String> outOption = parser.accepts("out", "If set, outputs the result to a separate file")
                 .withRequiredArg().ofType(String.class);
