@@ -9,6 +9,11 @@ if (!hasProperty('mainClass')) {
 apply plugin: 'application'
 
 mainClassName = mainClass;
+applicationName = 'QMTools';
+
+installApp.destinationDir = new File("$rootProject.buildDir/install")
+distTar.destinationDir = new File("$rootProject.buildDir")
+distZip.destinationDir = new File("$rootProject.buildDir")
 
 dependencies {
     compile project(':QMTool')
