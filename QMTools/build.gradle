@@ -6,23 +6,9 @@ if (!hasProperty('mainClass')) {
     ext.mainClass = 'org.multimc.qmtools.qmtools.QMTools'
 }
 
-apply plugin: 'gradle-one-jar'
 apply plugin: 'application'
 
 mainClassName = mainClass;
-
-buildscript {
-    repositories {
-        mavenCentral();
-    }
-    dependencies {
-        classpath 'com.github.rholder:gradle-one-jar:1.0.4'
-    }
-}
-
-task mainJar(type: OneJar) {
-    mainClass = project.mainClass
-}
 
 dependencies {
     compile project(':QMTool')
