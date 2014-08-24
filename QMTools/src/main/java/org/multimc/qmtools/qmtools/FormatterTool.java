@@ -17,7 +17,7 @@ public class FormatterTool extends AbstractTool {
     @Override
     public void run(String[] args) {
         if (args.length < 1) {
-            System.err.println("Expecting exactly at least one argument");
+            System.err.println("Expecting at least one argument");
             return;
         }
         try {
