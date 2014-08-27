@@ -12,7 +12,7 @@ import java.util.function.Predicate;
 
 public class QuickMod {
 
-    private int formatVersion = 1;
+    private int formatVersion = -1;
     private String uid;
     private String repo;
     private String modId;

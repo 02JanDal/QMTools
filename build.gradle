@@ -1,5 +1,5 @@
 if (!hasProperty('mainClass')) {
-    ext.mainClass = 'org.multimc.qmtools.qmtools.QMTools'
+    ext.mainClass = 'org.multimc.qmtools.QMTools'
 }
 
 apply plugin: 'application'

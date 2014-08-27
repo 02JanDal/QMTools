@@ -1,10 +1,6 @@
-package org.multimc.qmtools.qmtools;
+package org.multimc.qmtools;
 
-import org.multimc.qmtools.tools.GraphTool;
-import org.multimc.qmtools.tools.FormatterTool;
-import org.multimc.qmtools.tools.AbstractTool;
-import org.multimc.qmtools.tools.MetadataTool;
-import org.multimc.qmtools.tools.VersionsTool;
+import org.multimc.qmtools.tools.*;
 
 import java.io.File;
 import java.util.HashMap;
@@ -43,6 +39,7 @@ public class QMTools {
         map.put("metadata", new MetadataTool());
         map.put("versions", new VersionsTool());
         map.put("format", new FormatterTool());
+        map.put("verify", new VerificationTool());
         map.put("graph", new GraphTool());
         return map;
     }

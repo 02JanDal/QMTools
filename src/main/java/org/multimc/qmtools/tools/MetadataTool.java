@@ -74,6 +74,7 @@ public class MetadataTool extends AbstractTool {
             }
         } else {
             quickmod = new QuickMod();
+            quickmod.setFormatVersion(1);
         }
         
         if (options.has(formatVersionOption)) {
@@ -111,7 +112,7 @@ public class MetadataTool extends AbstractTool {
                 if (!urls.containsKey(parts[0])) {
                     urls.put(parts[0], new ArrayList<>());
                 }
-                Collection old = urls.get(parts[0]);
+                Collection<String> old = urls.get(parts[0]);
                 old.add(parts[1]);
                 urls.put(parts[0], old);
             }
@@ -137,7 +138,7 @@ public class MetadataTool extends AbstractTool {
                 if (!authors.containsKey(parts[0])) {
                     authors.put(parts[0], new ArrayList<>());
                 }
-                Collection old = authors.get(parts[0]);
+                Collection<String> old = authors.get(parts[0]);
                 old.add(parts[1]);
                 authors.put(parts[0], old);
             }

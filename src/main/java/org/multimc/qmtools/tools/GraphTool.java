@@ -45,29 +45,12 @@ public class GraphTool extends AbstractTool {
         OptionSpec<String> mcVersionOption = parser.accepts("mcVersion", "Choose the Minecraft version to use").withRequiredArg().ofType(String.class).defaultsTo("1.7.10");
         OptionSpec<File> filesOption = parser.nonOptions("file").describedAs("QuickMod files to use. Leave empty to use all in current directory.").ofType(File.class);
         OptionSet options = parser.parse(args);
-        
-        List<File> files = options.valuesOf(filesOption);
-        if (files == null || files.isEmpty()) {
-            files = Arrays.asList(new File(System.getProperty("user.dir")).listFiles(new FilenameFilter() {
-                @Override
-                public boolean accept(File file, String string) {
-                    return string.endsWith(".qm") || string.endsWith(".quickmod") || string.endsWith(".json");
-                }
-            }));
-        }
-        
-        List<QuickMod> quickmods = new LinkedList<QuickMod>();
-        for (int i = 0; i < files.size(); ++i) {
-            try {
-                System.out.println("Loading " + files.get(i));
-                quickmods.add(QuickModIOAccess.read(files.get(i)));
-            } catch (IOException ex) {
-                Logger.getLogger(GraphTool.class.getName()).log(Level.SEVERE, null, ex);
-            }
-        }
+
+        Collection<QuickMod> quickmods = AbstractTool.quickmods(filesOption, options).values();
         
         if (quickmods.isEmpty()) {
             System.out.println("No QuickMods selected, nothing available to display");
+            return;
         }
         
         // build graph structure

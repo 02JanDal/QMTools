@@ -11,7 +11,7 @@ public class QuickModVersion {
         Version version1 = new Version(v1);
         Version version2 = new Version(v2);
         
-        Version.Section dummy = new Version.Section("0", Integer.valueOf(0));
+        Version.Section dummy = new Version.Section("0", 0);
         for (int i = 0; i < Math.max(version1.getSections().size(), version2.getSections().size()); ++i) {
             Version.Section section1 = (i >= version1.getSections().size()) ? dummy : version1.getSections().get(i);
             Version.Section section2 = (i >= version2.getSections().size()) ? dummy : version2.getSections().get(i);
@@ -37,7 +37,7 @@ public class QuickModVersion {
             }
         }
         
-        private List<Section> sections = new LinkedList<Section>();
+        private List<Section> sections = new LinkedList<>();
         
         public List<Section> getSections() {
             return sections;
@@ -64,15 +64,15 @@ public class QuickModVersion {
         }
     }
 
-    private Collection<String> mcCompat = new ArrayList<String>();
+    private Collection<String> mcCompat = new ArrayList<>();
     private Interval forgeCompat;
     private Interval liteloaderCompat;
     private String name;
     private String version;
-    private String type = new String("Release");
+    private String type = "Release";
     private String sha1;
-    private Collection<QuickModReference> references = new ArrayList<QuickModReference>();
-    private Collection<QuickModDownload> urls = new ArrayList<QuickModDownload>();
+    private Collection<QuickModReference> references = new ArrayList<>();
+    private Collection<QuickModDownload> urls = new ArrayList<>();
     private InstallType installType;
     
     public enum InstallType {
@@ -140,6 +140,10 @@ public class QuickModVersion {
 
     public String getVersion() {
         return version == null ? name : version;
+    }
+
+    public String getVersionRaw() {
+        return version;
     }
 
     public void setVersion(String version) {
