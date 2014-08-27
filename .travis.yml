@@ -7,13 +7,14 @@ script:
  - ./gradlew --daemon jar
  - ./gradlew --daemon test
  - ./gradlew --daemon distZip distTar
- - gzip --stdout build/QMTools-*.tar > build/QMTools.tar.gz
- - cp build/QMTools-*.zip build/QMTools.zip
+ - gzip --stdout build/distributions/QMTools-*.tar > build/QMTools.tar.gz
+ - cp build/distributions/QMTools-*.zip build/QMTools.zip
+ - cp build/libs/QMLib-*.jar build/QMLib.jar
 deploy:
   provider: releases
   api_key:
     secure: k0049gjGsBMaswoleZCCCWGmFHWB8qwK4qMkuC8uP5qGf+uKWS+KvLOBETvFbLvcM6rf1hzJZM/d0I0zjd1N3ZGJwZsRAfb2rg4XDJz/jYNL4MxdCael1ipGG3712h1jjr2oL0OBY0Mp3BbI6H9UfSuPyBsPmNq8ayWjLVOxsU0=
-  file: build/QMTools.tar.gz build/QMTools.zip
+  file: build/QMTools.tar.gz build/QMTools.zip build/QMLib.jar
   on:
     all_branches: true
     tags: true

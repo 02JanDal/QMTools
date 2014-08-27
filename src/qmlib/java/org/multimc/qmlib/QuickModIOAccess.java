@@ -1,4 +1,4 @@
-package org.multimc.qmtools;
+package org.multimc.qmlib;
 
 import java.io.File;
 import java.io.FileNotFoundException;

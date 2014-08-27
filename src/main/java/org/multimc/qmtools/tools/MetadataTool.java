@@ -14,8 +14,8 @@ import joptsimple.OptionParser;
 import joptsimple.OptionSet;
 import joptsimple.OptionSpec;
 import joptsimple.OptionSpecBuilder;
-import org.multimc.qmtools.QuickMod;
-import org.multimc.qmtools.QuickModIOAccess;
+import org.multimc.qmlib.QuickMod;
+import org.multimc.qmlib.QuickModIOAccess;
 
 public class MetadataTool extends AbstractTool {
 

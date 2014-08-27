@@ -3,8 +3,8 @@ package org.multimc.qmtools.tools;
 import java.io.IOException;
 import java.util.logging.Level;
 import java.util.logging.Logger;
-import org.multimc.qmtools.QuickMod;
-import org.multimc.qmtools.QuickModIOAccess;
+import org.multimc.qmlib.QuickMod;
+import org.multimc.qmlib.QuickModIOAccess;
 
 public class FormatterTool extends AbstractTool {
 

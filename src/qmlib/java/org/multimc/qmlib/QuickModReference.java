@@ -1,4 +1,4 @@
-package org.multimc.qmtools;
+package org.multimc.qmlib;
 
 public class QuickModReference {
     private String type;

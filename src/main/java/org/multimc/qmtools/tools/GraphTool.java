@@ -21,10 +21,10 @@ import org.graphstream.graph.Graph;
 import org.graphstream.graph.Node;
 import org.graphstream.graph.implementations.SingleGraph;
 import org.graphstream.stream.file.FileSinkDOT;
-import org.multimc.qmtools.QuickMod;
-import org.multimc.qmtools.QuickModIOAccess;
-import org.multimc.qmtools.QuickModReference;
-import org.multimc.qmtools.QuickModVersion;
+import org.multimc.qmlib.QuickMod;
+import org.multimc.qmlib.QuickModIOAccess;
+import org.multimc.qmlib.QuickModReference;
+import org.multimc.qmlib.QuickModVersion;
 
 public class GraphTool extends AbstractTool {
     

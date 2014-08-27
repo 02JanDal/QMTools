@@ -1,4 +1,4 @@
-package org.multimc.qmtools;
+package org.multimc.qmlib;
 
 public class QuickModDownload {
     private String url;

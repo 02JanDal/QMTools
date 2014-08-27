@@ -13,12 +13,12 @@ import joptsimple.OptionParser;
 import joptsimple.OptionSet;
 import joptsimple.OptionSpec;
 import joptsimple.OptionSpecBuilder;
-import org.multimc.qmtools.Interval;
-import org.multimc.qmtools.QuickMod;
-import org.multimc.qmtools.QuickModDownload;
-import org.multimc.qmtools.QuickModIOAccess;
-import org.multimc.qmtools.QuickModReference;
-import org.multimc.qmtools.QuickModVersion;
+import org.multimc.qmlib.Interval;
+import org.multimc.qmlib.QuickMod;
+import org.multimc.qmlib.QuickModDownload;
+import org.multimc.qmlib.QuickModIOAccess;
+import org.multimc.qmlib.QuickModReference;
+import org.multimc.qmlib.QuickModVersion;
 
 public class VersionsTool extends AbstractTool {
     

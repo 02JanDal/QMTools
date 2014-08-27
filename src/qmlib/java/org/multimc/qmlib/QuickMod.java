@@ -1,4 +1,4 @@
-package org.multimc.qmtools;
+package org.multimc.qmlib;
 
 import com.google.gson.Gson;
 import com.google.gson.GsonBuilder;
