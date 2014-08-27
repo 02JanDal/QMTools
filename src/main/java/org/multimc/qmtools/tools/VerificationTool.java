@@ -31,7 +31,7 @@ public class VerificationTool extends AbstractTool {
         Map<String, QuickMod> quickmods = AbstractTool.quickmods(filesOption, options);
 
         if (quickmods.isEmpty()) {
-            System.out.println("No QuickMods selected, nothing available to display");
+            System.out.println("No QuickMods selected, nothing available to verify");
             return;
         }
 

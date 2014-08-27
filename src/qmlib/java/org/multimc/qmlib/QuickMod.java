@@ -54,6 +54,14 @@ public class QuickMod {
         return m_gson.fromJson(json, QuickMod.class);
     }
 
+    public static QuickModIndex indexFromJson(String json) {
+        return m_gson.fromJson(json, QuickModIndex.class);
+    }
+
+    public static String indexToJson(QuickModIndex index) {
+        return m_gson.toJson(index);
+    }
+
     public String toJson() {
         return m_gson.toJson(this);
     }

@@ -40,6 +40,7 @@ public class QMTools {
         map.put("versions", new VersionsTool());
         map.put("format", new FormatterTool());
         map.put("verify", new VerificationTool());
+        map.put("index", new IndexTool());
         map.put("graph", new GraphTool());
         return map;
     }

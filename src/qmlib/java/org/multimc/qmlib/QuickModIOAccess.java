@@ -22,6 +22,10 @@ public class QuickModIOAccess {
         writeFile(filename, quickmod.toJson());
     }
 
+    public static void write(String filename, QuickModIndex index) throws FileNotFoundException {
+        writeFile(filename, QuickMod.indexToJson(index));
+    }
+
     private static String readFile(String filename) throws IOException {
         return new String(Files.readAllBytes(Paths.get(filename)), StandardCharsets.UTF_8);
     }
