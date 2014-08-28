@@ -4,8 +4,7 @@ cache:
   directories:
    - $HOME/.gradle
 script:
- - ./gradlew --daemon jar
- - ./gradlew --daemon test
+ - ./gradlew --daemon jacocoReport coveralls
  - ./gradlew --daemon distZip distTar
  - gzip --stdout build/distributions/QMTools-*.tar > build/QMTools.tar.gz
  - cp build/distributions/QMTools-*.zip build/QMTools.zip

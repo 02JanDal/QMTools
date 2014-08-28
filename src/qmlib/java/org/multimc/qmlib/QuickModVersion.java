@@ -1,67 +1,71 @@
 package org.multimc.qmlib;
 
+import org.apache.commons.lang3.StringUtils;
+
 import java.util.ArrayList;
 import java.util.Collection;
-import java.util.LinkedList;
-import java.util.List;
 
 public class QuickModVersion {
-
-    public static int compareVersion(String v1, String v2) {
-        Version version1 = new Version(v1);
-        Version version2 = new Version(v2);
-        
-        Version.Section dummy = new Version.Section("0", 0);
-        for (int i = 0; i < Math.max(version1.getSections().size(), version2.getSections().size()); ++i) {
-            Version.Section section1 = (i >= version1.getSections().size()) ? dummy : version1.getSections().get(i);
-            Version.Section section2 = (i >= version2.getSections().size()) ? dummy : version2.getSections().get(i);
-            int result = section1.compare(section2);
-            if (result != 0) {
-                return result;
-            }
+    private boolean secureEquals(Object first, Object second) {
+        if (first != null) {
+            return first.equals(second);
+        } else if (second != null) {
+            return second.equals(first);
+        } else {
+            return first == second;
         }
-        
-        return 0;
     }
-    
-    private static class Version {
-        public Version(String str) {
-            String[] parts = str.split(".");
-            for (String part : parts) {
-                try {
-                    Integer integer = Integer.parseInt(part);
-                    sections.add(new Section(part, integer));
-                } catch (NumberFormatException ex) {
-                    sections.add(new Section(part));
-                }
-            }
+
+    @Override
+    public boolean equals(Object other) {
+        if (other == this) {
+            return true;
         }
-        
-        private List<Section> sections = new LinkedList<>();
-        
-        public List<Section> getSections() {
-            return sections;
+        if (!(other instanceof QuickModVersion)) {
+            return false;
         }
-        
-        public static class Section {
-            public Section(String str, Integer num) {
-                this.string = str;
-                this.number = num;
-                this.numValid = true;
-            }
-            public Section(String str) {
-                this.string = str;
-                this.numValid = false;
-            }
-            
-            public String string;
-            public Integer number;
-            public boolean numValid;
-            
-            public int compare(Section other) {
-                return numValid && other.numValid ? Integer.compare(number, other.number) : string.compareTo(other.string);
-            }
+        QuickModVersion version = (QuickModVersion) other;
+        return secureEquals(this.mcCompat, version.mcCompat)
+                && secureEquals(this.forgeCompat, version.forgeCompat)
+                && secureEquals(this.liteloaderCompat, version.liteloaderCompat)
+                && secureEquals(this.name, version.name)
+                && secureEquals(this.version, version.version)
+                && secureEquals(this.type, version.type)
+                && secureEquals(this.sha1, version.sha1)
+                && secureEquals(this.references, version.references)
+                && secureEquals(this.urls, version.urls)
+                && secureEquals(this.installType, version.installType);
+    }
+
+    @Override
+    public int hashCode() {
+        return this.mcCompat.hashCode() ^ this.name.hashCode();
+    }
+
+    @Override
+    public QuickModVersion clone() {
+        QuickModVersion other;
+        try {
+            other = (QuickModVersion) super.clone();
+        } catch (CloneNotSupportedException e) {
+            throw new AssertionError();
         }
+        other.mcCompat = mcCompat;
+        other.forgeCompat = forgeCompat;
+        other.liteloaderCompat = liteloaderCompat;
+        other.name = name;
+        other.version = version;
+        other.type = type;
+        other.sha1 = sha1;
+        other.references = references;
+        other.urls = urls;
+        other.installType = installType;
+        return other;
+    }
+
+    @Override
+    public String toString() {
+        return "QuickModVersion(name=" + name + ", mcCompat=" + StringUtils.join(mcCompat, " ") + ", forgeCompat=" + forgeCompat.toString() + ")";
     }
 
     private Collection<String> mcCompat = new ArrayList<>();

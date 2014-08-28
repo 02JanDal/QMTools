@@ -1,4 +1,5 @@
 [![Build Status](https://travis-ci.org/02JanDal/QMTools.svg?branch=master)](https://travis-ci.org/02JanDal/QMTools)
+[![Coverage Status](https://img.shields.io/coveralls/02JanDal/QMTools.svg)](https://coveralls.io/r/02JanDal/QMTools?branch=master)
 
 QMTools is a collection of Java-based tools to modify QuickMod files.
 

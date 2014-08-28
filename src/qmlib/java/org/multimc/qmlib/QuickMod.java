@@ -2,15 +2,56 @@ package org.multimc.qmlib;
 
 import com.google.gson.Gson;
 import com.google.gson.GsonBuilder;
+
 import java.net.URL;
 import java.util.ArrayList;
 import java.util.Collection;
 import java.util.HashMap;
-import java.util.Iterator;
 import java.util.Map;
 import java.util.function.Predicate;
 
 public class QuickMod {
+    private boolean secureEquals(Object first, Object second) {
+        if (first != null) {
+            return first.equals(second);
+        } else if (second != null) {
+            return second.equals(first);
+        } else {
+            return first == second;
+        }
+    }
+
+    @Override
+    public boolean equals(Object other) {
+        if (other == this) {
+            return true;
+        }
+        if (!(other instanceof QuickMod)) {
+            return false;
+        }
+        QuickMod mod = (QuickMod) other;
+        return secureEquals(mod.formatVersion, formatVersion)
+                && secureEquals(mod.uid, uid)
+                && secureEquals(mod.repo, repo)
+                && secureEquals(mod.modId, modId)
+                && secureEquals(mod.name, name)
+                && secureEquals(mod.nemName, nemName)
+                && secureEquals(mod.description, description)
+                && secureEquals(mod.license, license)
+                && secureEquals(mod.urls, urls)
+                && secureEquals(mod.updateUrl, updateUrl)
+                && secureEquals(mod.tags, tags)
+                && secureEquals(mod.categories, categories)
+                && secureEquals(mod.authors, authors)
+                && secureEquals(mod.references, references)
+                && secureEquals(mod.versions, versions)
+                && secureEquals(mod.mavenRepos, mavenRepos);
+    }
+
+    @Override
+    public int hashCode() {
+        return this.uid.hashCode() ^ this.repo.hashCode() ^ this.versions.hashCode();
+    }
 
     private int formatVersion = -1;
     private String uid;
@@ -26,7 +67,7 @@ public class QuickMod {
     private Collection<String> categories = new ArrayList<>();
     private Map<String, Collection<String>> authors = new HashMap<>();
     private Map<String, String> references = new HashMap<>();
-    private final Collection<QuickModVersion> versions = new ArrayList<>();
+    private Collection<QuickModVersion> versions = new ArrayList<>();
     private Collection<URL> mavenRepos;
 
     private static Gson m_gson;

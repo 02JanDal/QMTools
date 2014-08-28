@@ -1,13 +1,10 @@
 package org.multimc.qmtools.tools;
 
 import java.io.File;
-import java.io.FilenameFilter;
 import java.io.IOException;
-import java.util.Arrays;
 import java.util.Collection;
 import java.util.Collections;
 import java.util.HashMap;
-import java.util.LinkedList;
 import java.util.List;
 import java.util.Map;
 import java.util.logging.Level;
@@ -21,10 +18,7 @@ import org.graphstream.graph.Graph;
 import org.graphstream.graph.Node;
 import org.graphstream.graph.implementations.SingleGraph;
 import org.graphstream.stream.file.FileSinkDOT;
-import org.multimc.qmlib.QuickMod;
-import org.multimc.qmlib.QuickModIOAccess;
-import org.multimc.qmlib.QuickModReference;
-import org.multimc.qmlib.QuickModVersion;
+import org.multimc.qmlib.*;
 
 public class GraphTool extends AbstractTool {
     
@@ -112,7 +106,7 @@ public class GraphTool extends AbstractTool {
 
     private QuickModVersion selectVersion(QuickMod quickmod, String mcVersion) {
         Collection<QuickModVersion> versions = quickmod.getVersions();
-        Collections.sort((List<QuickModVersion>)versions, (QuickModVersion t1, QuickModVersion t2) -> QuickModVersion.compareVersion(t1.getVersion(), t2.getVersion()));
+        Collections.sort((List<QuickModVersion>)versions, (QuickModVersion t1, QuickModVersion t2) -> Version.compare(t1.getVersion(), t2.getVersion()));
         for (QuickModVersion version : versions) {
             if (mcVersion == null || version.getMcCompat().contains(mcVersion)) {
                 return version;

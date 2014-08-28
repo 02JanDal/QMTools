@@ -1,9 +1,30 @@
 package org.multimc.qmlib;
 
 public class QuickModReference {
+    @Override
+    public boolean equals(Object other) {
+        if (other == this) {
+            return true;
+        }
+        if (!(other instanceof QuickModReference)) {
+            return false;
+        }
+        QuickModReference ref = (QuickModReference) other;
+        return ref.type.equals(type) && ref.uid.equals(uid) && ref.version.equals(version);
+    }
+
     private String type;
     private String uid;
     private Interval version;
+
+    public QuickModReference() {
+    }
+
+    public QuickModReference(String type, String uid, Interval version) {
+        this.type = type;
+        this.uid = uid;
+        this.version = version;
+    }
 
     public String getType() {
         return type;

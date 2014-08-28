@@ -1,11 +1,23 @@
 package org.multimc.qmlib;
 
 public class QuickModDownload {
-    private String url;
+    @Override
+    public boolean equals(Object other) {
+        if (other == this) {
+            return true;
+        }
+        if (!(other instanceof QuickModDownload)) {
+            return false;
+        }
+        QuickModDownload dl = (QuickModDownload) other;
+        return dl.url.equals(url) && dl.downloadType.equals(downloadType) && dl.priority == priority && dl.hint.equals(hint) && dl.group.equals(group);
+    }
+
+    private String url = "";
     private DownloadType downloadType = DownloadType.parallel;
     private int priority;
-    private String hint;
-    private String group;
+    private String hint = "";
+    private String group = "";
 
     public QuickModDownload() {
     }

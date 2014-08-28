@@ -13,12 +13,7 @@ import joptsimple.OptionParser;
 import joptsimple.OptionSet;
 import joptsimple.OptionSpec;
 import joptsimple.OptionSpecBuilder;
-import org.multimc.qmlib.Interval;
-import org.multimc.qmlib.QuickMod;
-import org.multimc.qmlib.QuickModDownload;
-import org.multimc.qmlib.QuickModIOAccess;
-import org.multimc.qmlib.QuickModReference;
-import org.multimc.qmlib.QuickModVersion;
+import org.multimc.qmlib.*;
 
 public class VersionsTool extends AbstractTool {
     
@@ -121,16 +116,12 @@ public class VersionsTool extends AbstractTool {
         }
         Collection<QuickModReference> references = version.getReferences();
         for (String reference : options.valuesOf(referencesOption)) {
-            QuickModReference ref = new QuickModReference();
             String[] parts = reference.split(":");
             if (parts.length != 3) {
                 VersionsTool.getLogger().log(Level.SEVERE, "Reference item needs to be in the format <type>:<uid>:<version>");
                 return;
             }
-            ref.setType(parts[0]);
-            ref.setUid(parts[1]);
-            ref.setVersion(parts[2]);
-            references.add(ref);
+            references.add(new QuickModReference(parts[0], parts[1], new Interval(new Version(parts[2]))));
         }
         version.setReferences(references);
         Collection<QuickModDownload> urls = version.getUrls();

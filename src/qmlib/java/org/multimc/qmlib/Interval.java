@@ -1,18 +1,53 @@
 package org.multimc.qmlib;
 
 public class Interval {
-    
-    private String lower = "";
-    private String upper = "";
+
+    @Override
+    public boolean equals(Object other) {
+        if (other == this) {
+            return true;
+        }
+        if (!(other instanceof Interval)) {
+            return false;
+        }
+        Interval interval = (Interval) other;
+        if (interval.isPlain() != isPlain()) {
+            return false;
+        }
+        if (isPlain()) {
+            return interval.plain.equals(plain);
+        } else {
+            return interval.lower.equals(lower) && interval.upper.equals(upper) && interval.lowerInclusive == lowerInclusive && interval.upperInclusive == upperInclusive;
+        }
+    }
+
+    @Override
+    public int hashCode() {
+        if (this.plain != null) {
+            return this.plain.hashCode();
+        } else {
+            int hash = Boolean.valueOf(this.lowerInclusive).hashCode() ^ Boolean.valueOf(this.upperInclusive).hashCode();
+            if (this.lower != null) {
+                hash ^= this.lower.hashCode();
+            }
+            if (this.upper != null) {
+                hash ^= this.upper.hashCode();
+            }
+            return hash;
+        }
+    }
+
+    private Version lower = null;
+    private Version upper = null;
     private boolean lowerInclusive = true;
     private boolean upperInclusive = false;
-    private String plain = null;
+    private Version plain = null;
     
     public static Interval fromString(String str) {
         Interval interval = new Interval();
         try {
-        if (str.length() < 5) {
-            throw new IntervalParseException("Interval needs to be at least 5 characters long (" + str + ")");
+        if (str.length() < 3) {
+            throw new IntervalParseException("Interval needs to be at least 3 characters long (" + str + ")");
         }
         if (str.startsWith("(")) {
             interval.setLowerInclusive(false);
@@ -32,38 +67,38 @@ public class Interval {
             throw new IntervalParseException("Interval needs to contain a ',' (" + str + ")");
         }
         } catch (IntervalParseException ex) {
-            return new Interval(str);
+            return new Interval(new Version(str));
         }
         str = str.substring(1, str.length() - 1);
         int midPos = str.indexOf(',');
-        interval.setLower(str.substring(0, midPos));
-        interval.setUpper(str.substring(midPos + 1));
+        interval.setLower(new Version(str.substring(0, midPos)));
+        interval.setUpper(new Version(str.substring(midPos + 1)));
         return interval;
     }
     
-    public Interval(String lower, String upper) {
+    public Interval(Version lower, Version upper) {
         this.lower = lower;
         this.upper = upper;
     }
-    public Interval(String plain) {
+    public Interval(Version plain) {
         this.plain = plain;
     }
     public Interval() {
     }
 
-    public String getLower() {
+    public Version getLower() {
         return lower;
     }
 
-    public void setLower(String lower) {
+    public void setLower(Version lower) {
         this.lower = lower;
     }
 
-    public String getUpper() {
+    public Version getUpper() {
         return upper;
     }
 
-    public void setUpper(String upper) {
+    public void setUpper(Version upper) {
         this.upper = upper;
     }
 
@@ -83,16 +118,24 @@ public class Interval {
         this.upperInclusive = upperInclusive;
     }
 
+    public boolean isPlain() {
+        return this.plain != null;
+    }
+
+    public Version getPlain() {
+        return this.plain;
+    }
+
     @Override
     public String toString() {
         if (this.plain != null) {
-            return this.plain;
+            return this.plain.toString();
         }
         StringBuilder builder = new StringBuilder();
         builder.append(this.lowerInclusive ? '[' : '(');
-        builder.append(this.lower);
+        builder.append(this.lower.toString());
         builder.append(',');
-        builder.append(this.upper);
+        builder.append(this.upper.toString());
         builder.append(this.upperInclusive ? ']' : ')');
         return builder.toString();
     }
