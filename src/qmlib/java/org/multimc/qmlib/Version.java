@@ -18,6 +18,15 @@ public class Version {
         return Version.compare(this, (Version) other) == 0;
     }
 
+    @Override
+    public int hashCode() {
+        int hash = 0;
+        for (Section section : sections) {
+            hash ^= section.numValid ? section.number : section.string.hashCode();
+        }
+        return hash;
+    }
+
     public Version(String str) {
         String[] parts = str.split("\\.");
         for (String part : parts) {

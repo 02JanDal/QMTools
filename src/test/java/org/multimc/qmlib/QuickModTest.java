@@ -2,6 +2,9 @@ package org.multimc.qmlib;
 
 import org.junit.Test;
 
+import java.io.File;
+import java.io.FileNotFoundException;
+import java.io.IOException;
 import java.util.*;
 
 import static org.junit.Assert.*;
@@ -14,10 +17,12 @@ public class QuickModTest extends BaseQMTest {
 
         assertEquals(qm.getFormatVersion(), 4);
         assertEquals(qm.getRepo(), "my.repo");
+        assertEquals(qm.getUid(), "this.is.mod");
         assertEquals(qm.getName(), "This Is Mod");
         assertEquals(qm.getModId(), "ThisIsMod");
         assertEquals(qm.getNemName(), "ThisIiisMod");
         assertEquals(qm.getDescription(), "This is a description");
+        assertEquals(qm.getUpdateUrl(), "http://stuff.com/this.is.mod.quickmod");
         assertEquals(qm.getAuthors(), createAuthors());
         assertEquals(qm.getUrls(), createUrls());
         assertEquals(qm.getCategories(), createStringList("Tech", "Magic", "Everything else"));
@@ -30,9 +35,30 @@ public class QuickModTest extends BaseQMTest {
     @Test
     public void testEqualsAndHashCode() {
         QuickMod qm = createQuickMod();
+        QuickMod qm2 = createQuickMod();
+        qm2.setUid("something else");
 
         assertEquals("Testing hashCode", qm.hashCode(), createQuickMod().hashCode());
         assertEquals("Testing equals", qm, createQuickMod());
+        assertFalse(qm.equals(qm2));
+        assertTrue(qm.equals(qm));
+        assertFalse(qm.equals(new String()));
+
+        qm2 = createQuickMod();
+        qm2.setDescription(null);
+        assertFalse(qm.equals(qm2));
+    }
+
+    @Test
+    public void testConstructor() {
+        QuickMod mod = new QuickMod();
+
+        mod.setUid("this.is.mod");
+        mod.setRepo("my.repo");
+        mod.setName("This Is Mod");
+        mod.setUpdateUrl("https://stuffffffffffffff.com");
+
+        assertEquals(mod, new QuickMod("this.is.mod", "my.repo", "This Is Mod", "https://stuffffffffffffff.com"));
     }
 
     @Test
@@ -71,5 +97,22 @@ public class QuickModTest extends BaseQMTest {
         qm.clearVersions();
         assertFalse(qm.containsVersion("12.55"));
         assertNull(qm.findVersion("12.55"));
+    }
+
+    @Test
+    public void testParse() throws IOException {
+        QuickMod expected = BaseQMTest.createQuickMod();
+        expected.addVersion(BaseQMTest.createQuickModVersion());
+
+        assertEquals(expected, QuickModIOAccess.read(new File(getClass().getResource("/quickmod.quickmod").getFile())));
+    }
+
+    @Test
+    public void testRoundtrip() throws IOException {
+        QuickMod original = BaseQMTest.createQuickMod();
+        QuickModIOAccess.write("quickmod.qm", original);
+        QuickMod roundtrip = QuickModIOAccess.read(new File("quickmod.qm"));
+
+        assertEquals(original, roundtrip);
     }
 }

@@ -30,21 +30,11 @@ public class QuickMod {
             return false;
         }
         QuickMod mod = (QuickMod) other;
-        return secureEquals(mod.formatVersion, formatVersion)
-                && secureEquals(mod.uid, uid)
-                && secureEquals(mod.repo, repo)
-                && secureEquals(mod.modId, modId)
-                && secureEquals(mod.name, name)
-                && secureEquals(mod.nemName, nemName)
-                && secureEquals(mod.description, description)
-                && secureEquals(mod.license, license)
-                && secureEquals(mod.urls, urls)
-                && secureEquals(mod.updateUrl, updateUrl)
-                && secureEquals(mod.tags, tags)
-                && secureEquals(mod.categories, categories)
-                && secureEquals(mod.authors, authors)
-                && secureEquals(mod.references, references)
-                && secureEquals(mod.versions, versions)
+        return secureEquals(mod.formatVersion, formatVersion) && secureEquals(mod.uid, uid) && secureEquals(mod.repo, repo)
+                && secureEquals(mod.modId, modId) && secureEquals(mod.name, name) && secureEquals(mod.nemName, nemName)
+                && secureEquals(mod.description, description) && secureEquals(mod.license, license) && secureEquals(mod.urls, urls)
+                && secureEquals(mod.updateUrl, updateUrl) && secureEquals(mod.tags, tags) && secureEquals(mod.categories, categories)
+                && secureEquals(mod.authors, authors) && secureEquals(mod.references, references) && secureEquals(mod.versions, versions)
                 && secureEquals(mod.mavenRepos, mavenRepos);
     }
 

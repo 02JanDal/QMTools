@@ -25,16 +25,11 @@ public class QuickModVersion {
             return false;
         }
         QuickModVersion version = (QuickModVersion) other;
-        return secureEquals(this.mcCompat, version.mcCompat)
-                && secureEquals(this.forgeCompat, version.forgeCompat)
-                && secureEquals(this.liteloaderCompat, version.liteloaderCompat)
-                && secureEquals(this.name, version.name)
-                && secureEquals(this.version, version.version)
-                && secureEquals(this.type, version.type)
-                && secureEquals(this.sha1, version.sha1)
-                && secureEquals(this.references, version.references)
-                && secureEquals(this.urls, version.urls)
-                && secureEquals(this.installType, version.installType);
+        return secureEquals(this.mcCompat, version.mcCompat) && secureEquals(this.forgeCompat, version.forgeCompat)
+                && secureEquals(this.liteloaderCompat, version.liteloaderCompat) && secureEquals(this.name, version.name)
+                && secureEquals(this.version, version.version) && secureEquals(this.type, version.type)
+                && secureEquals(this.sha1, version.sha1) && secureEquals(this.references, version.references)
+                && secureEquals(this.urls, version.urls) && secureEquals(this.installType, version.installType);
     }
 
     @Override

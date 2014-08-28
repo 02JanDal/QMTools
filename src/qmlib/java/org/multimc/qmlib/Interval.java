@@ -26,14 +26,7 @@ public class Interval {
         if (this.plain != null) {
             return this.plain.hashCode();
         } else {
-            int hash = Boolean.valueOf(this.lowerInclusive).hashCode() ^ Boolean.valueOf(this.upperInclusive).hashCode();
-            if (this.lower != null) {
-                hash ^= this.lower.hashCode();
-            }
-            if (this.upper != null) {
-                hash ^= this.upper.hashCode();
-            }
-            return hash;
+            return lower.hashCode() ^ upper.hashCode();
         }
     }
 

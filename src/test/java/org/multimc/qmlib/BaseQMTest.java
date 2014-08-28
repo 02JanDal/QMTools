@@ -69,6 +69,7 @@ public class BaseQMTest {
         qm.setModId("ThisIsMod");
         qm.setNemName("ThisIiisMod");
         qm.setDescription("This is a description");
+        qm.setUpdateUrl("http://stuff.com/this.is.mod.quickmod");
         qm.setAuthors(createAuthors());
         qm.setUrls(createUrls());
         qm.setCategories(createStringList("Tech", "Magic", "Everything else"));

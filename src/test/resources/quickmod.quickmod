@@ -1,0 +1,54 @@
+{
+    "uid": "this.is.mod",
+    "formatVersion": 4,
+    "repo": "my.repo",
+    "name": "This Is Mod",
+    "modId": "ThisIsMod",
+    "nemName": "ThisIiisMod",
+    "description": "This is a description",
+    "updateUrl": "http://stuff.com/this.is.mod.quickmod",
+    "authors": {
+        "Founders": [ "Ford Prefect", "Zaphod Beeblebrox", "Arthur Philip Dent" ],
+        "Pokémon": [ "Bulbasaur", "Ivysaur", "thường" ]
+    },
+    "urls": {
+        "website": [ "https://iamboredofwritingunittests.com/", "ssh:iwonderifpeoplewillusethisscheme.nope/" ],
+        "issues": [ "github://Nope@Nope/issues", "nope" ]
+    },
+    "categories": [ "Tech", "Magic", "Everything else" ],
+    "tags": [ "MJ", "EU", "Dogs" ],
+    "license": "This quickmod is free for your dog to use",
+    "mavenRepos": [
+        "http://ihaveacatonmykejfaiedasfhv",
+        "https://cat.miau.foodnoworiwillkillyou"
+    ],
+    "references": {
+        "i.am.bored": "github://Nope@Nope/IAMBORED.json",
+        "stuff": "http://morestuff.evenmorestuff/somefile.someextension"
+    },
+    "versions": [
+        {
+            "name": "1.42-beta",
+            "version": "1.42",
+            "forgeCompat": "[1.1.1.1,2.2.2)",
+            "liteloaderCompat": "5",
+            "installType": "liteloaderMod",
+            "mcCompat": [ "1.4.6", "1.8.1" ],
+            "sha1": "7283abd87d",
+            "type": "Beta",
+            "urls": [
+                {
+                    "url": "http://money.trees",
+                    "downloadType": "parallel"
+                }
+            ],
+            "references": [
+                {
+                    "uid": "other.mod",
+                    "version": "5.3.1",
+                    "type": "recommends"
+                }
+            ]
+        }
+    ]
+}
