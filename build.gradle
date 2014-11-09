@@ -9,6 +9,7 @@ buildscript {
 
     dependencies {
         classpath 'org.kt3k.gradle.plugin:coveralls-gradle-plugin:2.0.0'
+        classpath 'me.tatarka:gradle-retrolambda:2.4.1'
     }
 }
 
@@ -16,6 +17,7 @@ apply plugin: 'application'
 apply plugin: 'java'
 apply plugin: 'jacoco'
 apply plugin: 'com.github.kt3k.coveralls'
+apply plugin: 'retrolambda'
 
 jacoco {
     toolVersion = "0.7.0.201403182114"
@@ -99,5 +101,5 @@ dependencies {
 }
 
 task wrapper(type: Wrapper, description: 'Creates and deploys the Gradle wrapper to the current directory.') {
-    gradleVersion = '2.0' //Always try to use latest
+    gradleVersion = '2.1' //Always try to use latest
 }
